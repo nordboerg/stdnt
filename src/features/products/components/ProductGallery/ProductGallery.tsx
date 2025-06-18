@@ -1,9 +1,7 @@
-import { useMemo } from "react";
 import { ProductGalleryItem } from "../ProductGalleryItem/ProductGalleryItem.tsx";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getProducts, Product } from "../../../../services/products.service.ts";
 import { VirtuosoGrid } from "react-virtuoso";
 import { useProductsQueryData } from "../../hooks/useProductsQueryData.tsx";
+import { Spinner } from "../../../../components/Spinner/Spinner.tsx";
 
 const LIMIT = 10;
 const SKIP = 10;
@@ -30,7 +28,9 @@ export const ProductGallery = () => {
       components={{
         Footer: () =>
           isFetching ? (
-            <div className="flex justify-center p-8 ">Loading...</div>
+            <div className="flex justify-center p-8">
+              <Spinner />
+            </div>
           ) : null,
       }}
     />
