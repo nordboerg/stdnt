@@ -1,4 +1,12 @@
-export const ProductGalleryItem = () => (
+import { Product } from "../../../../services/products.service.ts";
+
+interface Props {
+  product: Product;
+}
+
+export const ProductGalleryItem = ({
+  product: { title, price, images },
+}: Props) => (
   <div className="bg-gray-200 p-4 flex flex-col gap-4 w-fit">
     <div className="flex items-center justify-between">
       <span className="text-sm bg-orange-100/60 px-4 py-1 rounded-full">
@@ -8,16 +16,11 @@ export const ProductGalleryItem = () => (
         Customize
       </button>
     </div>
-    <img
-      src="https://png.pngtree.com/png-vector/20231023/ourmid/pngtree-modern-wooden-desk-desk-png-image_10294080.png"
-      alt="Desk image"
-      width={400}
-      height={400}
-    />
+    <img src={images[0]} alt="Desk image" width={400} height={400} />
     <div className="bg-white p-3 gap-3 flex items-center">
       <div>
-        <p className="font-medium">Standing Desk</p>
-        <p className="text-sm text-gray-400">From $990.00</p>
+        <p className="font-medium">{title}</p>
+        <p className="text-sm text-gray-400">From ${price}</p>
       </div>
       <div className="w-px self-stretch bg-gray-400 ml-auto" />
       <img
