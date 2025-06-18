@@ -7,11 +7,24 @@ const LIMIT = 10;
 const SKIP = 10;
 
 export const ProductGallery = () => {
-  const { data, isFetching, totalCount, fetchNextPage } = useProductsQueryData(
-    LIMIT,
-    SKIP,
-  );
+  const { data, error, isFetching, totalCount, fetchNextPage } =
+    useProductsQueryData(LIMIT, SKIP);
 
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!isFetching && !error && !data?.length) {
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <p>No products found</p>
+      </div>
+    );
+  }
   return (
     <VirtuosoGrid
       style={{
@@ -20,6 +33,7 @@ export const ProductGallery = () => {
         maxWidth: "1280px",
       }}
       listClassName="grid gap-4 md:grid-cols-3 sm:grid-cols-2 justify-center max-w-screen-xl"
+      itemClassName="max-h-[540px]"
       data={data}
       totalCount={totalCount}
       endReached={() => fetchNextPage()}

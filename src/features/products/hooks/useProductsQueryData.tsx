@@ -3,7 +3,7 @@ import { getProducts, Product } from "../../../services/products.service.ts";
 import { useMemo } from "react";
 
 export const useProductsQueryData = (limit: number, skip: number) => {
-  const { data, isFetching, fetchNextPage } = useInfiniteQuery({
+  const { data, error, isFetching, fetchNextPage } = useInfiniteQuery({
     queryKey: ["products"],
     queryFn: getProducts,
     initialPageParam: { limit, skip: 0 },
@@ -22,12 +22,19 @@ export const useProductsQueryData = (limit: number, skip: number) => {
     );
   }, [data]);
 
+  const errorMessage = useMemo(() => {
+    if (!error) return null;
+
+    return error.message ?? "Unknown error occurred";
+  }, [error]);
+
   const totalCount = useMemo(() => data?.pages[0]?.total, [data]);
 
   return {
     data: productData,
-    totalCount,
+    error: errorMessage,
     isFetching,
+    totalCount,
     fetchNextPage,
   };
 };
