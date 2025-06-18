@@ -25,6 +25,7 @@ export const ProductGallery = () => {
       </div>
     );
   }
+
   return (
     <VirtuosoGrid
       style={{
@@ -37,7 +38,7 @@ export const ProductGallery = () => {
       data={data}
       totalCount={totalCount}
       endReached={() => fetchNextPage()}
-      increaseViewportBy={200}
+      increaseViewportBy={400}
       itemContent={(_, product) => <ProductGalleryItem product={product} />}
       components={{
         Footer: () =>
@@ -47,6 +48,7 @@ export const ProductGallery = () => {
             </div>
           ) : null,
       }}
+      data-testid="grid-container"
     />
   );
 };
