@@ -1,5 +1,5 @@
 export const Spinner = () => (
-  <div role="status">
+  <div role="status" data-testid="loading-spinner">
     <svg
       aria-hidden="true"
       className="inline w-10 h-10 text-gray-200 animate-spin dark:text-gray-400 fill-blue-600"

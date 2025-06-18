@@ -25,9 +25,9 @@ interface ProductsResponse {
 }
 
 export type Product = {
-  id: string;
+  id: number;
   title: string;
   description: string;
-  price: string;
+  price: number;
   images: string[];
 };
