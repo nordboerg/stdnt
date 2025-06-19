@@ -48,7 +48,6 @@ export const ProductGallery = () => {
             </div>
           ) : null,
       }}
-      data-testid="grid-container"
     />
   );
 };
