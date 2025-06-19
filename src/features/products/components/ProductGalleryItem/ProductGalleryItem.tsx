@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const ProductGalleryItem = ({
-  product: { title, price, images },
+  product: { title, price, images, description },
 }: Props) => (
   <div className="bg-gray-200 p-4 flex flex-col gap-4 w-fit">
     <div className="flex items-center justify-between">
@@ -16,7 +16,7 @@ export const ProductGalleryItem = ({
         Customize
       </button>
     </div>
-    <img src={images[0]} alt="Desk image" width={400} height={400} />
+    <img src={images[0]} alt={description} width={400} height={400} />
     <div className="bg-white p-3 gap-3 flex items-center">
       <div>
         <p className="font-medium">{title}</p>
