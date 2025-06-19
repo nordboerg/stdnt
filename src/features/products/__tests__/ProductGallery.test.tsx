@@ -47,7 +47,7 @@ describe("ProductGallery", () => {
       <QueryClientProvider client={queryClient}>
         <VirtuosoGridMockContext.Provider
           value={{
-            viewportHeight: 1000,
+            viewportHeight: 600,
             viewportWidth: 1280,
             itemHeight: 540,
             itemWidth: 410,
@@ -83,6 +83,25 @@ describe("ProductGallery", () => {
     await waitFor(() => {
       expect(container).toMatchSnapshot();
       expect(screen.getByText("Product 1")).toBeInTheDocument();
+    });
+  });
+
+  it("should not render products outside the virtualization boundary", async () => {
+    const mockData = mockProductResponse(0, LIMIT);
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(mockData),
+      }),
+    );
+
+    render(<ProductGallery />, { wrapper });
+
+    await waitFor(() => {
+      expect(screen.getByText("Product 1")).toBeInTheDocument();
+      expect(screen.queryByText("Product 9")).not.toBeInTheDocument();
     });
   });
 
