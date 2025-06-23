@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Layout = ({ children }: Props) => (
-  <main className="grow h-screen px-20 py-12 bg-gray-100 flex justify-center">
+  <main className="grow px-20 py-12 bg-gray-100 flex justify-center">
     {children}
   </main>
 );

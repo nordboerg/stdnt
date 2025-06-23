@@ -39,6 +39,7 @@ export const ProductGallery = () => {
       totalCount={totalCount}
       endReached={() => fetchNextPage()}
       increaseViewportBy={400}
+      useWindowScroll={true}
       itemContent={(_, product) => <ProductGalleryItem product={product} />}
       components={{
         Footer: () =>
